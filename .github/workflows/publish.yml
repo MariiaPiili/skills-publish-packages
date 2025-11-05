@@ -2,7 +2,7 @@ name: Publish to Docker
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:          # ← добавь это, чтобы можно было запустить вручную
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ toLower(github.repository_owner) }}/skills-publish-packages/game
+          images: ghcr.io/mariiapili/skills-publish-packages/game
           tags: type=sha
 
       - name: Login to GHCR
@@ -35,4 +35,5 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
 
